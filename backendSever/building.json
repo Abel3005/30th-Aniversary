@@ -1,0 +1,185 @@
+{
+    "actuator" : [
+    {
+        "id" : 11,
+        "building" : "인문경영관",
+        "years" : 1991,
+        "height" : 135
+    },
+    {
+        "id" : 41,
+        "building" : "학생회관",
+        "years" : 1991,
+        "height" : 120
+    },
+    {
+        "id" : 28,
+        "building" : "해울관",
+        "years" : 1991,
+        "height" : 175
+    },
+
+    {
+        "id" : 18,
+        "building" : "예지관",
+        "years" : 1992,
+        "height" : 160
+    },
+
+    {
+        "id" : 0,
+        "building" : "공학1관및다리",
+        "years" : 1993,
+        "height" : 90
+    },
+
+    {
+        "id" : 15,
+        "building" : "함지관",
+        "years" : 1995,
+        "height" : 150
+    },
+
+    {
+        "id" : 46,
+        "building" : "강당 + 국제교육센터",
+        "years" : 1997,
+        "height" : 110
+    },
+
+    {
+        "id" : 35,
+        "building" : "공학2관",
+        "years" : 1999,
+        "height" : 70
+    },
+
+    {
+        "id" : 5,
+        "building" : "소울관 + 공학4관 A,B",
+        "years" : 1999,
+        "height" : 125
+    },
+
+
+    {
+        "id" : 13,
+        "building" : "다솔관",
+        "years" : 1999,
+        "height" : 155
+    },
+
+    {
+        "id" : 42,
+        "building" : "공학3관",
+        "years" : 2000,
+        "height" : 130
+    },
+
+    {
+        "id" : 49,
+        "building" : "대학본부",
+        "years" : 2000,
+        "height" : 120
+    },
+
+    {
+        "id" : 29,
+        "building" : "한울관",
+        "years" : 2000,
+        "height" : 180
+    },
+
+    {
+        "id" : 45,
+        "building" : "복지관",
+        "years" : 2001,
+        "height" : 60
+    },
+
+    {
+        "id" : 12,
+        "building" : "창업보육관",
+        "years" : 2002,
+        "height" : 135
+    },
+
+    {
+        "id" : 20,
+        "building" : "캠퍼스컴퍼니",
+        "years" : 2004,
+        "height" : 125
+    },
+
+    {
+        "id" : 10,
+        "building" : "청솔관 + IH + 참빛관",
+        "years" : 2008,
+        "height" : 225
+    },
+
+
+    {
+        "id" : 2,
+        "building" : "다산정보관",
+        "years" : 2009,
+        "height" : 190
+    },
+
+    {
+        "id" : 51,
+        "building" : "새롬관",
+        "years" : 2009,
+        "height" : 105
+    },
+
+    {
+        "id" : 34,
+        "building" : "담헌실학관",
+        "years" : 2012,
+        "height" : 195
+    },
+
+    {
+        "id" : 14,
+        "building" : "나래돔",
+        "years" : 2012,
+        "height" : 115
+    },
+
+    {
+        "id" : 9,
+        "building" : "예솔관",
+        "years" : 2012,
+        "height" : 160
+    },
+    {
+        "id" : 19,
+        "building" : "은솔관",
+        "years" : 2014,
+        "height" : 195
+    },
+
+    {
+        "id" : 8,
+        "building" : "체육관",
+        "years" : 2014,
+        "height" : 185
+    },
+
+    {
+        "id" : 27,
+        "building" : "산학협력단",
+        "years" : 2015,
+        "height" : 200
+    },
+
+    {
+        "id" : 24,
+        "building" : "K-factory",
+        "years" : 2019,
+        "height" : 140
+    }
+    ]
+
+}
