@@ -9,7 +9,7 @@ import './css/style.css';
 import Modal from './Modal';
 const SEVER = '192.168.0.12:20000';
 
-const year_list = [1990, 1991, 1992, 1993, 1995, 1997, 1999, 2000, 2001, 2002, 2004,2008, 2009, 2012, 2014, 2015, 2019];
+const year_list = [1990, 1991, 1992, 1993, 1995, 1997, 1999, 2000, 2001, 2002, 2004, 2008, 2009, 2012, 2014, 2015, 2019];
 // const year_interval = [0, 16, 33, 50, 68, 84, 102, 117, 134, 152, 170, 186, 204, 219, 237, 254, 289];
 // const play_rate_list = [5.3, 5.6, 6.3, 5, 6, 5, 5.6, 6, 6, 5.3, 6, 5, 6, 5.6, 11.6];
 // var id =0;
@@ -69,7 +69,7 @@ class App extends React.Component {
         this.initRef.current.addEventListener("mousedown", this.initStart);  
         this.fullTrigRef.current.addEventListener("mousedown", this.fullScreen)
     }
-    frontYearButton = (intindex) => {
+    frontYearButton = (intindex, fromYear, toYear) => {
       if(this.state.playState == 2)
       {
         this.openModal(999);
@@ -98,6 +98,7 @@ class App extends React.Component {
       else
       {
         this.state.playState = 2;
+        this.actuactorUp(fromYear,toYear,false)
         for(var i =0; i < 6; i++)
         {
           if (this.yearRef[i].current.classList.contains('on')) 
@@ -196,28 +197,22 @@ class App extends React.Component {
       
     }
     year1MouseDown = () => {
-      this.frontYearButton(0)
-      this.actuactorUp(1990,1995,false);
+      this.frontYearButton(0, 1990,1995)
     }
     year2MouseDown = () => {
-      this.frontYearButton(1);
-      this.actuactorUp(1996,2000, false);
+      this.frontYearButton(1,1996,2000);
     }
     year3MouseDown = () => {
-      this.frontYearButton(2);
-      this.actuactorUp(2001,2005,false);
+      this.frontYearButton(2,2001,2005);
     }
     year4MouseDown = () => {
-      this.frontYearButton(3);
-      this.actuactorUp(2006,2010,false);
+      this.frontYearButton(3,2006,2010);
     }
     year5MouseDown = () => {
-      this.frontYearButton(4);
-      this.actuactorUp(2011,2015,false);
+      this.frontYearButton(4,2011,2015);;
     }
     year6MouseDown = () => {
-      this.frontYearButton(5);
-      this.actuactorUp(2016,2020,false);
+      this.frontYearButton(5,2016,2020);
     }
     initStart = () => {
       this.initRef.current.classList.add('on');
@@ -229,6 +224,7 @@ class App extends React.Component {
     }
     playstart = () => {
       if (this.state.playState == 2) {
+        this.openModal(999);
         return;
       }
       if(!this.playRef.current.classList.contains('on'))
