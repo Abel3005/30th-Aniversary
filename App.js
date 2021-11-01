@@ -72,7 +72,7 @@ class App extends React.Component {
     frontYearButton = (intindex) => {
       if(this.state.playState == 2)
       {
-        alert('updating');
+        this.openModal(999);
         if(this.fullTrigRef.current.classList.contains('on'))
         {
           console.log('full');
@@ -81,11 +81,17 @@ class App extends React.Component {
               this.mainBody.current.requestFullscreen();
             },300); 
           } else if (this.mainBody.current.mozRequestFullScreen) {
-            this.mainBody.current.mozRequestFullScreen();
+            setTimeout(() => {
+              this.mainBody.current.mozRequestFullScreen();
+            },300); 
           } else if (this.mainBody.current.webkitRequestFullscreen) {
-            this.mainBody.current.webkitRequestFullscreen();
+            setTimeout(() => {
+              this.mainBody.current.webkitRequestFullscreen();
+            },300); 
           } else if (this.mainBody.current.msRequestFullscreen) {
-            this.mainBody.current.msRequestFullscreen();
+            setTimeout(() => {
+              this.mainBody.current.msRequestFullscreen();
+            },300); 
           }
         }
       }
@@ -877,6 +883,8 @@ class App extends React.Component {
                   </div>
                 </main>
               </div>
+              <div> 
+                <Modal open={this.state.modalOpen == 999} close={this.closeModal} nameTxt="시대 이동중입니다." contentTxt="잠시 후 눌러주세요."></Modal></div>
             </div>
           </div>
       );
