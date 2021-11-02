@@ -14,12 +14,16 @@ export default class Modal extends React.Component{
                             <button className="close" onClick={close}>&times;</button>
                         </header>
                         <main>
-                            <img src={imgURL} alt="" />
+                        { imgURL ? (
+                            <div>
+                                <img src={imgURL} alt="" />
+                            </div>
+                        ): null}
                             <p className="modal_text">
                             <span className="modal_day">{dayTxt}</span>
                             {contentTxt}
                             </p>
-                        </main>
+                         </main>
                         <footer>
                         </footer>
                     </section>

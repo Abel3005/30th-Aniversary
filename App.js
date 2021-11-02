@@ -46,6 +46,7 @@ class App extends React.Component {
         this.gallery_build = React.createRef();
         this.btn_build = React.createRef();
         this.btn_gallery = React.createRef();
+        this.fullTrigRef = React.createRef();
         this.playtimer = [];
         this.yeartimer = [];
 
@@ -107,6 +108,39 @@ class App extends React.Component {
             .yearRef10
             .current
             .addEventListener("mousedown", this.year10MouseDown);
+            this.fullTrigRef.current.addEventListener("mousedown", this.fullScreen);
+    }
+    fullScreen = () => {
+      if(!this.fullTrigRef.current.classList.contains('on'))
+      {
+        this.fullTrigRef.current.classList.add('on');
+        if (this.mainBody.current.requestFullscreen) {
+          console.log('1');
+          this.mainBody.current.requestFullscreen();
+        } else if (this.mainBody.current.mozRequestFullScreen) {
+          console.log('2');
+          this.mainBody.current.mozRequestFullScreen();
+        } else if (this.mainBody.current.webkitRequestFullscreen) {
+          console.log('3');
+          this.mainBody.current.webkitRequestFullscreen();
+        } else if (this.mainBody.current.msRequestFullscreen) {
+          console.log('4');
+          this.mainBody.current.msRequestFullscreen();
+        }
+      }
+      else
+      {
+        this.fullTrigRef.current.classList.remove('on');
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        }
+      }
     }
     //#region
     play = (intVar) => {
@@ -134,7 +168,7 @@ class App extends React.Component {
     year1MouseDown = () => {
       if(this.state.playState == 2)
       {
-
+        this.openModal(999);
       }
       else
       {
@@ -206,7 +240,10 @@ class App extends React.Component {
             for (var i = 0; i < 16; i++) {
                 clearTimeout(this.playtimer[i]);
             }
-
+        }
+        if(this.yearRef10.current.classList.contains('on'))
+        {
+          this.yearRef10.current.classList.remove('on');
         }
         this
             .socket
@@ -237,7 +274,7 @@ class App extends React.Component {
 
     }
     year2MouseDown = () => {
-      if (this.state.playState == 2) {alert('Updating')} else {
+      if (this.state.playState == 2) {this.openModal(999)} else {
         this.state.playState = 2;
     if (!this.yearRef2.current.classList.contains('on')) 
         this
@@ -308,6 +345,10 @@ class App extends React.Component {
         }
 
     }
+    if(this.yearRef10.current.classList.contains('on'))
+    {
+      this.yearRef10.current.classList.remove('on');
+    }
     this
         .socket
         .emit('year', 1997)
@@ -328,7 +369,7 @@ class App extends React.Component {
     year3MouseDown = () => {
         if(this.state.playState == 2)
         {
-            alert('Updating');
+          this.openModal(999);
         }
         else
         {
@@ -402,6 +443,10 @@ class App extends React.Component {
             }
 
         }
+        if(this.yearRef10.current.classList.contains('on'))
+        {
+          this.yearRef10.current.classList.remove('on');
+        }
         this
             .socket
             .emit('year', 2001)
@@ -422,7 +467,7 @@ class App extends React.Component {
     year4MouseDown = () => {
       if(this.state.playState == 2)
       {
-          alert('Updating');
+        this.openModal(999);
       }
       else
       {
@@ -496,6 +541,10 @@ class App extends React.Component {
             }
 
         }
+        if(this.yearRef10.current.classList.contains('on'))
+        {
+          this.yearRef10.current.classList.remove('on');
+        }
         this
             .socket
             .emit('year', 2008)
@@ -510,7 +559,7 @@ class App extends React.Component {
     }
     year5MouseDown = () => {
       console.log(this.state.playState);
-        if (this.state.playState == 2) {alert('Updating')} else {
+        if (this.state.playState == 2) {this.openModal(999);} else {
           this.state.playState = 2;
             if (!this.yearRef5.current.classList.contains('on')) 
                 this
@@ -579,7 +628,10 @@ class App extends React.Component {
                 for (var i = 0; i < 16; i++) {
                     clearTimeout(this.playtimer[i]);
                 }
-
+            }
+            if(this.yearRef10.current.classList.contains('on'))
+            {
+              this.yearRef10.current.classList.remove('on');
             }
             this
                 .socket
@@ -599,7 +651,7 @@ class App extends React.Component {
 
     }
     year6MouseDown = () => {
-        if (this.state.playState == 2) {alert('Updating')} else {
+        if (this.state.playState == 2) {this.openModal(999)} else {
           this.state.playState = 2;
           console.log(this.state.playState);
             if (!this.yearRef6.current.classList.contains('on')) 
@@ -672,6 +724,10 @@ class App extends React.Component {
                 }
 
             }
+            if(this.yearRef10.current.classList.contains('on'))
+            {
+              this.yearRef10.current.classList.remove('on');
+            }
             this
                 .socket
                 .emit('year', 2019)
@@ -682,36 +738,26 @@ class App extends React.Component {
 
     }
     year7MouseDown = () => {
-        if (this.yearRef7.current.classList.contains('on')) {
-            this
-                .yearRef7
-                .current
-                .classList
-                .remove('on');
-            this
-                .socket
-                .emit('mode', "mode");
-            this
-                .socket
-                .emit('init', 0);
-            this.socket.emit('view', 578.5);
-            this.socket.emit('end_position',578.5);
-        } else {
-            this
-                .yearRef7
-                .current
-                .classList
-                .add('on');
-            this
-                .socket
-                .emit('mode', "mode");
-            this
-                .socket
-                .emit('init', 0);
-            this.socket.emit('view', 578.5);
-            this.socket.emit('end_position',578.5);
-            }
-
+      if (this.state.playState == 2) {
+        this.openModal(999);
+        return;
+      }
+      this.yearRef7.current.classList.add('on');
+      setTimeout(() => {
+        this.yearRef7.current.classList.remove('on');
+      },300)
+      for (var i = 0; i < 16; i++) 
+      {
+        clearTimeout(this.playtimer[i]);
+      }
+      if(this.yearRef10.current.classList.contains('on'))
+      {
+        this.yearRef10.current.classList.remove('on');
+      }
+      this.socket.emit('mode', "mode");
+      this.socket.emit('init', 0);
+      this.socket.emit('view', 578.5);
+      this.socket.emit('end_position',578.5);
     }
     year8MouseDown = () => {
         if (this.yearRef9.current.classList.contains('on')) {
@@ -730,7 +776,7 @@ class App extends React.Component {
         this
             .socket
             .emit('year', "UP");
-    }
+    }  
     year9MouseDown = () => {
         if (this.yearRef8.current.classList.contains('on')) {
             this
@@ -749,19 +795,7 @@ class App extends React.Component {
             .emit('year', "Down");
     }
     year10MouseDown = () => {
-        if (this.yearRef10.current.classList.contains('on')) {
-            this
-                .yearRef10
-                .current
-                .classList
-                .remove('on');
-        } else {
-            this
-                .yearRef10
-                .current
-                .classList
-                .add('on');
-        }
+        
         //#endregion playmode 동작
         if (this.state.playState == 1) {
             for (var i = 0; i < 16; i++) {
@@ -769,94 +803,107 @@ class App extends React.Component {
             }
 
         }
+        console.log(this.state.playState);
         if (this.state.playState == 2) {
+            console.log(this.state.playState);
+            this.openModal(999);
             return;
         }
-        this.state.playState = 1;
-        this
-            .socket
-            .emit('year', 1990);
-        this.playtimer[0] = setTimeout(() => {
+        else{
+          if (!this.yearRef10.current.classList.contains('on')) {
             this
-                .socket
-                .emit('year', 1991)
-        }, 3000);
-        this.playtimer[1] = setTimeout(() => {
-            this
-                .socket
-                .emit('year', 1992)
-        }, 6000);
-        this.playtimer[2] = setTimeout(() => {
-            this
-                .socket
-                .emit('year', 1993)
-        }, 9000);
-        this.playtimer[3] = setTimeout(() => {
-            this
-                .socket
-                .emit('year', 1995)
-        }, 12000);
-        this.playtimer[4] = setTimeout(() => {
-            this
-                .socket
-                .emit('year', 1997)
-        }, 15000);
-        this.playtimer[5] = setTimeout(() => {
-            this
-                .socket
-                .emit('year', 1999)
-        }, 18000);
-        this.playtimer[6] = setTimeout(() => {
-            this
-                .socket
-                .emit('year', 2000)
-        }, 21000);
-        this.playtimer[7] = setTimeout(() => {
-            this
-                .socket
-                .emit('year', 2001)
-        }, 24000);
-        this.playtimer[8] = setTimeout(() => {
-            this
-                .socket
-                .emit('year', 2002)
-        }, 27000);
-        this.playtimer[9] = setTimeout(() => {
-            this
-                .socket
-                .emit('year', 2004)
-        }, 30000);
-        this.playtimer[10] = setTimeout(() => {
-            this
-                .socket
-                .emit('year', 2008)
-        }, 33000);
-        this.playtimer[11] = setTimeout(() => {
-            this
-                .socket
-                .emit('year', 2009)
-        }, 36000);
-        this.playtimer[12] = setTimeout(() => {
-            this
-                .socket
-                .emit('year', 2012)
-        }, 39000);
-        this.playtimer[13] = setTimeout(() => {
-            this
-                .socket
-                .emit('year', 2014)
-        }, 42000);
-        this.playtimer[14] = setTimeout(() => {
-            this
-                .socket
-                .emit('year', 2015)
-        }, 45000);
-        this.playtimer[15] = setTimeout(() => {
-            this
-                .socket
-                .emit('year', 2019);
-            this.state.playState = 0;
-        }, 48000);
+                .yearRef10
+                .current
+                .classList
+                .add('on');
+          }
+          this.state.playState = 1;
+          this
+              .socket
+              .emit('year', 1990);
+          this.playtimer[0] = setTimeout(() => {
+              this
+                  .socket
+                  .emit('year', 1991)
+          }, 3000);
+          this.playtimer[1] = setTimeout(() => {
+              this
+                  .socket
+                  .emit('year', 1992)
+          }, 6000);
+          this.playtimer[2] = setTimeout(() => {
+              this
+                  .socket
+                  .emit('year', 1993)
+          }, 9000);
+          this.playtimer[3] = setTimeout(() => {
+              this
+                  .socket
+                  .emit('year', 1995)
+          }, 12000);
+          this.playtimer[4] = setTimeout(() => {
+              this
+                  .socket
+                  .emit('year', 1997)
+          }, 15000);
+          this.playtimer[5] = setTimeout(() => {
+              this
+                  .socket
+                  .emit('year', 1999)
+          }, 18000);
+          this.playtimer[6] = setTimeout(() => {
+              this
+                  .socket
+                  .emit('year', 2000)
+          }, 21000);
+          this.playtimer[7] = setTimeout(() => {
+              this
+                  .socket
+                  .emit('year', 2001)
+          }, 24000);
+          this.playtimer[8] = setTimeout(() => {
+              this
+                  .socket
+                  .emit('year', 2002)
+          }, 27000);
+          this.playtimer[9] = setTimeout(() => {
+              this
+                  .socket
+                  .emit('year', 2004)
+          }, 30000);
+          this.playtimer[10] = setTimeout(() => {
+              this
+                  .socket
+                  .emit('year', 2008)
+          }, 33000);
+          this.playtimer[11] = setTimeout(() => {
+              this
+                  .socket
+                  .emit('year', 2009)
+          }, 36000);
+          this.playtimer[12] = setTimeout(() => {
+              this
+                  .socket
+                  .emit('year', 2012)
+          }, 39000);
+          this.playtimer[13] = setTimeout(() => {
+              this
+                  .socket
+                  .emit('year', 2014)
+          }, 42000);
+          this.playtimer[14] = setTimeout(() => {
+              this
+                  .socket
+                  .emit('year', 2015)
+          }, 45000);
+          this.playtimer[15] = setTimeout(() => {
+              this
+                  .socket
+                  .emit('year', 2019);
+              this.state.playState = 0;
+          }, 48000);
+        }
+       
     }
     sliderMouseDown = event => {
         this.isDown = true;
@@ -1475,12 +1522,15 @@ class App extends React.Component {
                 <div className="s_item item4" ref={this.yearRef4}>2006~2010</div>
                 <div className="s_item item5" ref={this.yearRef5}>2011~2015</div>
                 <div className="s_item item6" ref={this.yearRef6}>2016~2020</div>
+                <div className="s_item item10" ref={this.yearRef10}>자동재생</div>
                 <div className="s_item item7" ref={this.yearRef7}>Init</div>
-                <div className="s_item item10" ref={this.yearRef10}>play</div>
+                <div className="s_item item9" ref ={this.fullTrigRef}>Full</div>
                 <div className="s_item item11">any</div>
               </div>
             </main>
           </div>
+          <div> 
+                <Modal open={this.state.modalOpen == 999} close={this.closeModal} nameTxt="시대 이동중입니다." contentTxt="잠시 후 눌러주세요." imgURL={require('./images/bg/클릭금지.jpg').default}></Modal></div>
         </div>
       </div>
     );
