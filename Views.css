@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: black;
+  background-color: white;
 }
 
 .App-logo {
@@ -15,7 +15,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -37,7 +37,14 @@
     transform: rotate(360deg);
   }
 }
-
+::backdrop {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background: white;
+}
 main {
   background-color: white;
 }

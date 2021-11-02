@@ -215,10 +215,22 @@ class App extends React.Component {
       this.frontYearButton(5,2016,2020);
     }
     initStart = () => {
+      if (this.state.playState == 2) {
+        this.openModal(999);
+        return;
+      }
       this.initRef.current.classList.add('on');
       setTimeout(() => {
         this.initRef.current.classList.remove('on');
       },300)
+      for (var i = 0; i < 16; i++) 
+      {
+        clearTimeout(this.playtimer[i]);
+      }
+      if(this.playRef.current.classList.contains('on'))
+      {
+        this.playRef.current.classList.remove('on');
+      }
       this.socket.emit('mode', "mode");
       this.socket.emit('init', 0);
     }
@@ -873,7 +885,7 @@ class App extends React.Component {
                     <div className="s_item item4" ref={this.yearRef[3]}>2006~2010</div>
                     <div className="s_item item5" ref={this.yearRef[4]}>2011~2015</div>
                     <div className="s_item item6" ref={this.yearRef[5]}>2016~2020</div>
-                    <div className="s_item item7" ref={this.playRef}>Play</div>
+                    <div className="s_item item7" ref={this.playRef}>자동재생</div>
                     <div className="s_item item8" ref={this.initRef}>Init</div>
                     <div className="s_item item9" ref ={this.fullTrigRef}>Full</div>
                   </div>
