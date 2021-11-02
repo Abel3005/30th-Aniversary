@@ -104,14 +104,6 @@ class App extends React.Component {
             .current
             .addEventListener("mousedown", this.year7MouseDown);
         this
-            .yearRef8
-            .current
-            .addEventListener("mousedown", this.year8MouseDown);
-        this
-            .yearRef9
-            .current
-            .addEventListener("mousedown", this.year9MouseDown);
-        this
             .yearRef10
             .current
             .addEventListener("mousedown", this.year10MouseDown);
@@ -702,6 +694,8 @@ class App extends React.Component {
             this
                 .socket
                 .emit('init', 0);
+            this.socket.emit('view', 578.5);
+            this.socket.emit('end_position',578.5);
         } else {
             this
                 .yearRef7
@@ -714,7 +708,9 @@ class App extends React.Component {
             this
                 .socket
                 .emit('init', 0);
-        }
+            this.socket.emit('view', 578.5);
+            this.socket.emit('end_position',578.5);
+            }
 
     }
     year8MouseDown = () => {
@@ -1480,8 +1476,6 @@ class App extends React.Component {
                 <div className="s_item item5" ref={this.yearRef5}>2011~2015</div>
                 <div className="s_item item6" ref={this.yearRef6}>2016~2020</div>
                 <div className="s_item item7" ref={this.yearRef7}>Init</div>
-                <div className="s_item item8" ref={this.yearRef8}>UP</div>
-                <div className="s_item item9" ref={this.yearRef9}>Down</div>
                 <div className="s_item item10" ref={this.yearRef10}>play</div>
                 <div className="s_item item11">any</div>
               </div>
