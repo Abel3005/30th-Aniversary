@@ -127,6 +127,30 @@ class App extends React.Component {
         }
       }
     }
+    yearElementPlay = (index, waitTime, play_flag) => {
+      if(play_flag == true)
+      {
+        console.log('year',year_list[index], 3000*waitTime);
+        setTimeout (() => {
+          this.socket.emit('year', year_list[index]);
+          console.log('up');
+        }, 3000 * waitTime);
+      }
+      else
+      {
+        setTimeout (() => {
+          this.socket.emit('year', year_list[index]);
+          this.state.playState=0;
+          console.log('end:', year_list[index], 3000*waitTime);
+          if(this.playRef.current.classList.contains('on'))
+          {
+            this.playRef.current.classList.remove('on');
+          }
+          console.log('playState', this.state.playState);
+        }, 3000 * waitTime);
+      }
+        
+    }
     actuactorUp = (fromYear, toYear ,playflag) => {
       console.log('actuator up');
       var fromIndex = -1;
@@ -136,23 +160,10 @@ class App extends React.Component {
       {
         for(var i = 0; i < year_list.length-1; i++)
         {
-          console.log('year',year_list[i], 3000*count);
-          this.playtimer[i] = setTimeout (() => {
-            this.socket.emit('year', year_list[i]);
-            console.log('up');
-          }, 3000 * count);
+          yearElementPlay(i,count, False);
           count++;
         }
-        setTimeout (() => {
-          this.socket.emit('year', year_list[year_list.length-1]);
-          this.state.playState=0;
-          console.log('end:', year_list[year_list.length-1], 3000*count);
-          if(this.playRef.current.classList.contains('on'))
-          {
-            this.playRef.current.classList.remove('on');
-          }
-          console.log('playState', this.state.playState);
-        }, 3000 * count);
+        this.yearElementPlay(year_list.length-1,count,True);
       }
       else
       {
@@ -178,23 +189,12 @@ class App extends React.Component {
           }
         }
         console.log('from: ',fromIndex,'To',toIndex);
-        for(var i = fromIndex; i < toIndex; i++)
+        for(var i = fromIndex; i <= toIndex; i++)
         {
-          console.log('year',year_list[i], 3000*count);
-          setTimeout (() => {
-            this.socket.emit('year', year_list[i]);
-            console.log('up');
-          }, 3000 * count);
+         this.yearElementPlay(i,count,False);
           count++;
         }
-        setTimeout (() => {
-          this.socket.emit('year', year_list[toIndex]);
-          this.state.playState=0;
-          console.log('end:', year_list[toIndex], 3000*count);
-          console.log('playState', this.state.playState);
-        }, 3000 * count);
       }
-      
     }
     year1MouseDown = () => {
       this.frontYearButton(0, 1990,1995)
